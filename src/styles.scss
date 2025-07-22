@@ -1,3 +1,6 @@
+@use "primeicons/primeicons.css";
+@import "primeicons/primeicons.css";
+
 @mixin generate-edged-step-utilities($prop-name, $class-prefix, $step, $max) {
   @for $i from 0 through $max {
     .#{$class-prefix}-#{$i} {
@@ -87,4 +90,94 @@
   width: 100%;
   margin: 0 auto;
   gap: 1.5rem;
+}
+
+.topbar {
+  background-color: var(--p-surface-0);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--p-surface-200);
+  width: 100%;
+}
+
+.p-dark .topbar {
+  background-color: var(--p-surface-900);
+  border-color: var(--p-surface-700);
+}
+
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-brand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.topbar-brand-text {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .topbar-brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.topbar-title {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--p-surface-700);
+  line-height: 1;
+}
+
+.p-dark .topbar-title {
+  color: var(--p-surface-100);
+}
+
+.topbar-subtitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--p-primary-500);
+  line-height: 1.25;
+}
+
+.p-dark .topbar-subtitle {
+  color: var(--p-primary-400);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topbar-theme-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: all 0.2s;
+  color: var(--p-surface-900);
+}
+
+.p-dark .topbar-theme-button {
+  color: var(--p-surface-0);
+}
+
+.topbar-theme-button:hover {
+  background-color: var(--p-surface-100);
+}
+
+.p-dark .topbar-theme-button:hover {
+  background-color: var(--p-surface-800);
 }

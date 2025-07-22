@@ -1,1 +1,46 @@
-<p>topbar works!</p>
+<div class="topbar-container">
+  <div class="topbar-brand">
+    <i class="pi pi-pencil"></i>
+    <span class="topbar-brand-text">
+          <span class="topbar-title">{{ 'title' | translate }}</span>
+          <small class="topbar-subtitle">{{ 'title-sub' | translate }}</small>
+        </span>
+  </div>
+  <div class="topbar-actions">
+    <p-select
+      (onChange)="langConfig().translate($event.value)"
+      [(ngModel)]="langConfig().selectedLanguage"
+      [options]="langConfig().supportedLanguages"
+    ></p-select>
+    <p-button
+      (click)="toggleDarkMode()"
+      class="topbar-theme-button"
+      rounded
+      text
+      type="button"
+    >
+      <i
+        [ngClass]="{
+              'pi-moon': isDarkMode(),
+              'pi-sun': !isDarkMode(),
+            }"
+        class="pi"
+      ></i>
+    </p-button>
+    <div class="relative">
+      <p-button
+        [hideOnOutsideClick]="true"
+        aria-label="Settings"
+        enterActiveClass="animate-scalein"
+        enterFromClass="hidden"
+        icon="pi pi-cog"
+        leaveActiveClass="animate-fadeout"
+        leaveToClass="hidden"
+        pStyleClass="@next"
+        rounded
+        text
+      />
+      <!--      <app-config class="hidden"/>-->
+    </div>
+  </div>
+</div>
