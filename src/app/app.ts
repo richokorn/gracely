@@ -7,10 +7,11 @@ import { LangConfigService } from './services/lang-config.service';
 import { MenuItemService } from './services/menu-item.service';
 import { MenuItem } from 'primeng/api';
 import { DataService } from './services/data.service';
+import { WriterWidgetComponent } from './components/writer-widget/writer-widget.component';
 
 @Component({
   selector: 'app-root',
-  imports: [TopbarComponent],
+  imports: [TopbarComponent, WriterWidgetComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

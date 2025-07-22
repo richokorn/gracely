@@ -8,10 +8,19 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { StyleClass } from 'primeng/styleclass';
+import { SettingsConfigComponent } from '../settings-config/settings-config.component';
 
 @Component({
   selector: 'app-topbar',
-  imports: [Button, Select, TranslatePipe, FormsModule, NgClass, StyleClass],
+  imports: [
+    Button,
+    Select,
+    TranslatePipe,
+    FormsModule,
+    NgClass,
+    StyleClass,
+    SettingsConfigComponent,
+  ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
   host: { class: 'topbar' },

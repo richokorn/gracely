@@ -1,0 +1,42 @@
+<div class="config-section">
+  <div>
+    <span class="config-label">Primary</span>
+    <div class="config-colors">
+      <button
+        (click)="updateColors($event, 'primary', pc)"
+        *ngFor="let pc of primaryColors()"
+        [ngClass]="[
+              'color-button',
+              selectedPrimaryColor() === pc.name ? 'selected' : '',
+            ]"
+        [ngStyle]="{ backgroundColor: pc?.palette?.['500'] }"
+        [title]="pc.name"
+        type="button"
+      ></button>
+    </div>
+  </div>
+  <div>
+    <span class="config-label">Surface</span>
+    <div class="config-colors">
+      <button
+        (click)="updateColors($event, 'surface', s)"
+        *ngFor="let s of surfaces"
+        [ngClass]="[
+              'color-button',
+              (
+                selectedSurface()
+                  ? selectedSurface() === s.name
+                  : isDarkMode()
+                    ? s.name === 'zinc'
+                    : s.name === 'slate'
+              )
+                ? 'selected'
+                : '',
+            ]"
+        [ngStyle]="{ backgroundColor: s?.palette?.['500'] }"
+        [title]="s.name"
+        type="button"
+      ></button>
+    </div>
+  </div>
+</div>
