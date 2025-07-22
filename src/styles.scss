@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+@mixin generate-edged-step-utilities($prop-name, $class-prefix, $step, $max) {
+  @for $i from 0 through $max {
+    .#{$class-prefix}-#{$i} {
+      #{$prop-name}: $i * $step;
+    }
+  }
+}
+
+@mixin generate-simple-step-utilities($prop-name, $class-prefix, $step, $max) {
+  @for $i from 0 through $max {
+    // X-axis (left and right)
+    .#{$class-prefix}-x-#{$i} {
+      #{$prop-name}-left: $i * $step;
+      #{$prop-name}-right: $i * $step;
+    }
+
+    // Y-axis (top and bottom)
+    .#{$class-prefix}-y-#{$i} {
+      #{$prop-name}-top: $i * $step;
+      #{$prop-name}-bottom: $i * $step;
+    }
+  }
+}
+
+// generate spacing utilities. Use via "class="m-2 p-x-3 gap-3" etc.
+@include generate-simple-step-utilities(gap, gap, 0.25rem, 10);
+
+@include generate-simple-step-utilities(margin, m, 0.25rem, 10);
+@include generate-edged-step-utilities(margin, m, 0.25rem, 10);
+
+@include generate-simple-step-utilities(padding, p, 0.25rem, 10);
+@include generate-edged-step-utilities(padding, p, 0.25rem, 10);
+
+.flex,
+.row,
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  &-reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.flex-column,
+.column,
+.col,
+.flex-col {
+  display: flex;
+  flex-direction: column;
+
+  &-reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+.space {
+  &-between {
+    justify-content: space-between;
+  }
+
+  &-around {
+    justify-content: space-around;
+  }
+
+  &-evenly {
+    justify-content: space-evenly;
+  }
+}
+
+.layout-container {
+  background-color: var(--p-surface-50);
+  color: var(--p-surface-950);
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.layout-grid {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
