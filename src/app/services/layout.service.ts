@@ -1,5 +1,5 @@
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export interface AppState {
   preset: string;
@@ -19,26 +19,26 @@ export class LayoutService {
     darkMode: false,
   };
 
-  appState = signal<AppState>(this._appState);
+  appState: WritableSignal<AppState> = signal<AppState>(this._appState);
 
   transitionComplete: WritableSignal<boolean> = signal<boolean>(false);
 
-  private initialized = false;
+  private initialized: boolean = false;
 
-  private appStateUpdate = new Subject<AppState>();
+  private appStateUpdate: Subject<AppState> = new Subject<AppState>();
 
-  appStateUpdate$ = this.appStateUpdate.asObservable();
+  appStateUpdate$: Observable<AppState> = this.appStateUpdate.asObservable();
 
   constructor() {
     effect(() => {
-      const appState = this.appState();
+      const appState: AppState = this.appState();
       if (appState) {
         this.onAppStateUpdate();
       }
     });
 
     effect(() => {
-      const state = this.appState();
+      const state: AppState = this.appState();
 
       if (!this.initialized || !state) {
         this.initialized = true;
@@ -47,6 +47,21 @@ export class LayoutService {
 
       this.handleDarkModeTransition(state);
     });
+  }
+
+  toggleDarkMode(appState?: AppState): void {
+    const _appState: AppState = appState || this.appState();
+    if (_appState.darkMode) {
+      document.documentElement.classList.add('p-dark');
+    } else {
+      document.documentElement.classList.remove('p-dark');
+    }
+  }
+
+  onAppStateUpdate() {
+    this._appState = { ...this.appState() };
+    this.appStateUpdate.next(this.appState());
+    this.toggleDarkMode();
   }
 
   private handleDarkModeTransition(config: AppState): void {
@@ -70,25 +85,10 @@ export class LayoutService {
       .catch(() => {});
   }
 
-  toggleDarkMode(appState?: AppState): void {
-    const _appState = appState || this.appState();
-    if (_appState.darkMode) {
-      document.documentElement.classList.add('p-dark');
-    } else {
-      document.documentElement.classList.remove('p-dark');
-    }
-  }
-
   private onTransitionEnd() {
     this.transitionComplete.set(true);
     setTimeout(() => {
       this.transitionComplete.set(false);
     });
-  }
-
-  onAppStateUpdate() {
-    this._appState = { ...this.appState() };
-    this.appStateUpdate.next(this.appState());
-    this.toggleDarkMode();
   }
 }
