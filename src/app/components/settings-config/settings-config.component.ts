@@ -9,12 +9,7 @@ import {
 } from '@angular/core';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
-import {
-  CommonModule,
-  isPlatformBrowser,
-  NgClass,
-  NgStyle,
-} from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import { PrimeNG } from 'primeng/config';
 import { LayoutService } from '../../services/layout.service';
@@ -39,8 +34,6 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
 @Component({
   selector: 'app-settings-config',
   imports: [
-    NgClass,
-    NgStyle,
     CommonModule,
     FormsModule,
     SelectButtonModule,

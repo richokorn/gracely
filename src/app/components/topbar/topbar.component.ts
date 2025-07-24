@@ -8,27 +8,29 @@ import {
 } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LangConfig } from '../../../types/lang-config.type';
-import { Button } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { AppState, LayoutService } from '../../services/layout.service';
-import { Select } from 'primeng/select';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Select, SelectModule } from 'primeng/select';
+import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { StyleClass } from 'primeng/styleclass';
+import { CommonModule } from '@angular/common';
+import { StyleClassModule } from 'primeng/styleclass';
 import { SettingsConfigComponent } from '../settings-config/settings-config.component';
-import { DrawerModule } from 'primeng/drawer';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-topbar',
   imports: [
-    Button,
-    Select,
-    TranslatePipe,
-    FormsModule,
-    NgClass,
-    StyleClass,
+    CommonModule,
+    ButtonModule,
+    StyleClassModule,
     SettingsConfigComponent,
-    DrawerModule,
+    ButtonModule,
+    ConfirmDialogModule,
+    SelectModule,
+    TranslateModule,
+    FormsModule,
+    Select,
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
