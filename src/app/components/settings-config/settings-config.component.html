@@ -2,17 +2,18 @@
   <div>
     <span class="config-label">Primary</span>
     <div class="config-colors">
-      <button
-        (click)="updateColors($event, 'primary', pc)"
-        *ngFor="let pc of primaryColors()"
-        [ngClass]="[
-              'color-button',
-              selectedPrimaryColor() === pc.name ? 'selected' : '',
-            ]"
-        [ngStyle]="{ backgroundColor: pc?.palette?.['500'] }"
-        [title]="pc.name"
-        type="button"
-      ></button>
+      @for (pc of primaryColors(); track pc.name) {
+        <button
+          (click)="updateColors($event, 'primary', pc)"
+          [ngClass]="[
+      'color-button',
+      selectedPrimaryColor() === pc.name ? 'selected' : ''
+    ]"
+          [ngStyle]="{ backgroundColor: pc?.palette?.['500'] }"
+          [title]="pc.name"
+          type="button"
+        ></button>
+      }
     </div>
   </div>
   <div>

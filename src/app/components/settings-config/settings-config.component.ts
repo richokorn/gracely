@@ -1,11 +1,33 @@
-import { Component, computed, inject, Input, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+  Signal,
+} from '@angular/core';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
-import { isPlatformBrowser, NgClass, NgForOf, NgStyle } from '@angular/common';
+import {
+  CommonModule,
+  isPlatformBrowser,
+  NgClass,
+  NgStyle,
+} from '@angular/common';
 import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
-import { Router } from '@angular/router';
 import { PrimeNG } from 'primeng/config';
 import { LayoutService } from '../../services/layout.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DrawerModule } from 'primeng/drawer';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { surfacesExport, SurfacesType } from './settings-config-presets';
+import { AuraBaseTokenSections } from '@primeuix/themes/aura/base';
+import { LaraBaseTokenSections } from '@primeuix/themes/lara/base';
 
 const presets = {
   Aura,
@@ -14,37 +36,28 @@ const presets = {
 
 declare type KeyOfType<T> = keyof T extends infer U ? U : never;
 
-declare type SurfacesType = {
-  name?: string;
-  palette?: {
-    0?: string;
-    50?: string;
-    100?: string;
-    200?: string;
-    300?: string;
-    400?: string;
-    500?: string;
-    600?: string;
-    700?: string;
-    800?: string;
-    900?: string;
-    950?: string;
-  };
-};
-
 @Component({
   selector: 'app-settings-config',
-  imports: [NgClass, NgForOf, NgStyle],
+  imports: [
+    NgClass,
+    NgStyle,
+    CommonModule,
+    FormsModule,
+    SelectButtonModule,
+    DrawerModule,
+    ToggleSwitchModule,
+    RadioButtonModule,
+    RippleModule,
+    ButtonModule,
+  ],
   templateUrl: './settings-config.component.html',
   styleUrl: './settings-config.component.scss',
   host: {
     class: 'config-panel',
   },
 })
-export class SettingsConfigComponent {
+export class SettingsConfigComponent implements OnInit {
   @Input() simple: boolean = false;
-
-  router = inject(Router);
 
   config: PrimeNG = inject(PrimeNG);
 
@@ -55,152 +68,26 @@ export class SettingsConfigComponent {
   primeng: PrimeNG = inject(PrimeNG);
 
   presets: string[] = Object.keys(presets);
-  surfaces: SurfacesType[] = [
-    {
-      name: 'slate',
-      palette: {
-        0: '#ffffff',
-        50: '#f8fafc',
-        100: '#f1f5f9',
-        200: '#e2e8f0',
-        300: '#cbd5e1',
-        400: '#94a3b8',
-        500: '#64748b',
-        600: '#475569',
-        700: '#334155',
-        800: '#1e293b',
-        900: '#0f172a',
-        950: '#020617',
-      },
-    },
-    {
-      name: 'gray',
-      palette: {
-        0: '#ffffff',
-        50: '#f9fafb',
-        100: '#f3f4f6',
-        200: '#e5e7eb',
-        300: '#d1d5db',
-        400: '#9ca3af',
-        500: '#6b7280',
-        600: '#4b5563',
-        700: '#374151',
-        800: '#1f2937',
-        900: '#111827',
-        950: '#030712',
-      },
-    },
-    {
-      name: 'zinc',
-      palette: {
-        0: '#ffffff',
-        50: '#fafafa',
-        100: '#f4f4f5',
-        200: '#e4e4e7',
-        300: '#d4d4d8',
-        400: '#a1a1aa',
-        500: '#71717a',
-        600: '#52525b',
-        700: '#3f3f46',
-        800: '#27272a',
-        900: '#18181b',
-        950: '#09090b',
-      },
-    },
-    {
-      name: 'neutral',
-      palette: {
-        0: '#ffffff',
-        50: '#fafafa',
-        100: '#f5f5f5',
-        200: '#e5e5e5',
-        300: '#d4d4d4',
-        400: '#a3a3a3',
-        500: '#737373',
-        600: '#525252',
-        700: '#404040',
-        800: '#262626',
-        900: '#171717',
-        950: '#0a0a0a',
-      },
-    },
-    {
-      name: 'stone',
-      palette: {
-        0: '#ffffff',
-        50: '#fafaf9',
-        100: '#f5f5f4',
-        200: '#e7e5e4',
-        300: '#d6d3d1',
-        400: '#a8a29e',
-        500: '#78716c',
-        600: '#57534e',
-        700: '#44403c',
-        800: '#292524',
-        900: '#1c1917',
-        950: '#0c0a09',
-      },
-    },
-    {
-      name: 'soho',
-      palette: {
-        0: '#ffffff',
-        50: '#ececec',
-        100: '#dedfdf',
-        200: '#c4c4c6',
-        300: '#adaeb0',
-        400: '#97979b',
-        500: '#7f8084',
-        600: '#6a6b70',
-        700: '#55565b',
-        800: '#3f4046',
-        900: '#2c2c34',
-        950: '#16161d',
-      },
-    },
-    {
-      name: 'viva',
-      palette: {
-        0: '#ffffff',
-        50: '#f3f3f3',
-        100: '#e7e7e8',
-        200: '#cfd0d0',
-        300: '#b7b8b9',
-        400: '#9fa1a1',
-        500: '#87898a',
-        600: '#6e7173',
-        700: '#565a5b',
-        800: '#3e4244',
-        900: '#262b2c',
-        950: '#0e1315',
-      },
-    },
-    {
-      name: 'ocean',
-      palette: {
-        0: '#ffffff',
-        50: '#fbfcfc',
-        100: '#F7F9F8',
-        200: '#EFF3F2',
-        300: '#DADEDD',
-        400: '#B1B7B6',
-        500: '#828787',
-        600: '#5F7274',
-        700: '#415B61',
-        800: '#29444E',
-        900: '#183240',
-        950: '#0c1920',
-      },
-    },
-  ];
+  surfaces: SurfacesType[] = surfacesExport;
+
   selectedPrimaryColor = computed(() => {
     return this.layoutService.appState().primary;
   });
-  selectedPreset = computed(() => this.layoutService.appState().preset);
-  isDarkMode = computed(() => this.layoutService.appState().darkMode);
-  selectedSurface = computed(() => this.layoutService.appState().surface);
-  primaryColors = computed<SurfacesType[]>(() => {
-    const presetPalette =
+
+  selectedPreset: Signal<string> = computed(
+    () => this.layoutService.appState().preset,
+  );
+  isDarkMode: Signal<boolean> = computed(
+    () => this.layoutService.appState().darkMode,
+  );
+  selectedSurface: Signal<string | undefined | null> = computed(
+    () => this.layoutService.appState().surface,
+  );
+  primaryColors: Signal<SurfacesType[]> = computed<SurfacesType[]>(() => {
+    const presetPalette:
+      | AuraBaseTokenSections.Primitive
+      | LaraBaseTokenSections.Primitive
+      | undefined =
       presets[this.layoutService.appState().preset as KeyOfType<typeof presets>]
         .primitive;
     const colors = [
