@@ -74,7 +74,7 @@ export class LayoutService {
   }
 
   private startViewTransition(config: AppState): void {
-    const transition = (document as any).startViewTransition(() => {
+    const transition: any = (document as any).startViewTransition(() => {
       this.toggleDarkMode(config);
     });
 
