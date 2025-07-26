@@ -1,1 +1,15 @@
-<p>writer-widget works!</p>
+<div class="layout-grid grid-content writer-container">
+  <div class="fade-overlay">
+    <textarea #textAreaElement
+              (click)="writerService.clearPlaceholder()"
+              (input)="onInput()"
+              [placeholder]="writerService._placeholder()"
+              class="ticker-input"
+              pInputText
+              pSize="large"
+              rows="2"></textarea>
+  </div>
+</div>
+
+
+

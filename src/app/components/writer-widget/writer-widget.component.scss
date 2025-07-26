@@ -1,0 +1,19 @@
+.writer-container {
+  position: relative;
+  height: 100%;
+}
+
+.ticker-input {
+  width: 100%;
+  font-family: monospace;
+  white-space: pre-wrap;
+  resize: none;
+  //padding-bottom: 0;
+  padding-top: 30rem;
+  overflow: hidden;
+}
+
+.fade-overlay {
+  mask-image: linear-gradient(to top, #fff 0%, transparent 80%);
+  mask-mode: alpha;
+}
