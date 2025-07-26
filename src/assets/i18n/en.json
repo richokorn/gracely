@@ -11,7 +11,9 @@
     "reset": "Reset",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "resetText": "Reset Text",
+    "fontSize": "Font Size"
   }
 }
 

@@ -3,7 +3,7 @@
   "subtitle": "Simply write.",
   "welcomePopup": {
     "message1": "Willkommen bei Gracely - hier wirst du nur sanft bestraft.",
-    "message2": "Jedes Zeichen hat eine viersekündige Gnadenfrist für Korrekturen. Danach wird es dauerhaft.",
+    "message2": "Jedes Zeichen hat eine viersekündige Gnadenfrist für Korrekturen. Danach unveränderbar.",
     "message3": "Gracely speichert nur ein Cookie – deinen eigenen Text, in deinem eigenen Browser.",
     "message4": "Im Menu oben rechts findest du weitere Funktionen."
   },
@@ -11,6 +11,8 @@
     "reset": "Zurücksetzen",
     "confirm": "Bestätigen",
     "cancel": "Abbrechen",
-    "back": "Zurück"
+    "back": "Zurück",
+    "resetText": "Text zurücksetzen",
+    "fontSize": "Schriftgröße"
   }
 }
