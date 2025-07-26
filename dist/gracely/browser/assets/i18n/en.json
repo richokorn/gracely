@@ -1,0 +1,19 @@
+{
+  "title": "gracely",
+  "title-sub": "Simply write.",
+  "welcomePopup": {
+    "message1": "Welcome to Gracely, where you're only slightly punished.",
+    "message2": "Every character is given four seconds of grace period to fix typos until it is permanent.",
+    "message3": "Gracely only stores 1 cookie. Your own writing to your own browser.",
+    "message4": "In the top-right menu, you can find more functions."
+  },
+  "common": {
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "back": "Back",
+    "resetText": "Reset Text",
+    "fontSize": "Font Size"
+  }
+}
+

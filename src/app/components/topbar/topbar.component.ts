@@ -10,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 import { LangConfig } from '../../../types/lang-config.type';
 import { ButtonModule } from 'primeng/button';
 import { AppState, LayoutService } from '../../services/layout.service';
-import { Select, SelectModule } from 'primeng/select';
+import { SelectModule } from 'primeng/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -30,7 +30,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     SelectModule,
     TranslateModule,
     FormsModule,
-    Select,
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
