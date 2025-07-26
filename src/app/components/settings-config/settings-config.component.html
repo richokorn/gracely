@@ -41,4 +41,48 @@
       }
     </div>
   </div>
+  <p-divider></p-divider>
+  <div>
+    <p-button
+      (click)="resetTextDialogVisible.set(true)"
+      [label]="'common.resetText' | translate"
+      class="reset-colors-button"
+      severity="secondary"
+    ></p-button>
+  </div>
+  <span class="config-label">{{ "common.fontSize" | translate }}</span>
+  <div class="row flex gap-2">
+    <p-button
+      (click)="writerService.updateFontSize('+')"
+      class="font-size-button"
+      icon="pi pi-plus"
+      severity="secondary"
+    ></p-button>
+    <p-button
+      (click)="writerService.updateFontSize('-')"
+      class="font-size-button"
+      icon="pi pi-minus"
+      severity="secondary"
+    ></p-button>
+    <p-button
+      (click)="writerService.updateFontSize('reset')"
+      [label]="'common.reset' | translate"
+      class="font-size-button"
+      icon="pi pi-refresh"
+      severity="secondary"
+    ></p-button>
+  </div>
 </div>
+
+<p-dialog [(visible)]="resetTextDialogVisible"
+          [modal]="true"
+          [style]="{ width: '25rem' }"
+          header="Really clear the text?">
+  <div class="flex justify-end gap-2">
+    <p-button (click)="resetTextDialogVisible.set(false)" label="Back" severity="secondary"/>
+    <p-button (click)="resetTextDialogVisible.set(false); writerService.resetText()" label="Confirm" severity="warn"/>
+    <span></span>
+    <span></span>
+    <small>Text will be copied to your clipboard when confirmed.</small>
+  </div>
+</p-dialog>

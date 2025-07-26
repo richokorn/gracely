@@ -5,7 +5,9 @@ import {
   Input,
   OnInit,
   PLATFORM_ID,
+  signal,
   Signal,
+  WritableSignal,
 } from '@angular/core';
 import Aura from '@primeng/themes/aura';
 import Lara from '@primeng/themes/lara';
@@ -23,6 +25,10 @@ import { ButtonModule } from 'primeng/button';
 import { surfacesExport, SurfacesType } from './settings-config-presets';
 import { AuraBaseTokenSections } from '@primeuix/themes/aura/base';
 import { LaraBaseTokenSections } from '@primeuix/themes/lara/base';
+import { Divider } from 'primeng/divider';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Dialog } from 'primeng/dialog';
+import { WriterService } from '../../services/writer.service';
 
 const presets = {
   Aura,
@@ -42,6 +48,9 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
     RadioButtonModule,
     RippleModule,
     ButtonModule,
+    Divider,
+    TranslatePipe,
+    Dialog,
   ],
   templateUrl: './settings-config.component.html',
   styleUrl: './settings-config.component.scss',
@@ -51,6 +60,9 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
 })
 export class SettingsConfigComponent implements OnInit {
   @Input() simple: boolean = false;
+
+  writerService: WriterService = inject(WriterService);
+  resetTextDialogVisible: WritableSignal<boolean> = signal(false);
 
   config: PrimeNG = inject(PrimeNG);
 
