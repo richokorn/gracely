@@ -7,11 +7,7 @@
         </span>
   </div>
   <div class="topbar-actions">
-    <p-select
-      (onChange)="langConfig().translate($event.value)"
-      [(ngModel)]="langConfig().selectedLanguage"
-      [options]="langConfig().supportedLanguages"
-    ></p-select>
+
     <p-button
       (click)="toggleDarkMode()"
       class="topbar-theme-button"
@@ -39,7 +35,7 @@
         rounded
         text
       />
-      <app-settings-config class="hidden"></app-settings-config>
+      <app-settings-config [langConfig]="langConfig()" class="hidden"></app-settings-config>
     </div>
   </div>
 </div>

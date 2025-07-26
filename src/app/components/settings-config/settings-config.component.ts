@@ -2,7 +2,9 @@ import {
   Component,
   computed,
   inject,
+  input,
   Input,
+  InputSignal,
   OnInit,
   PLATFORM_ID,
   signal,
@@ -29,6 +31,8 @@ import { Divider } from 'primeng/divider';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Dialog } from 'primeng/dialog';
 import { WriterService } from '../../services/writer.service';
+import { Select } from 'primeng/select';
+import { LangConfig } from '../../../types/lang-config.type';
 
 const presets = {
   Aura,
@@ -51,6 +55,7 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
     Divider,
     TranslatePipe,
     Dialog,
+    Select,
   ],
   templateUrl: './settings-config.component.html',
   styleUrl: './settings-config.component.scss',
@@ -60,6 +65,7 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
 })
 export class SettingsConfigComponent implements OnInit {
   @Input() simple: boolean = false;
+  langConfig: InputSignal<LangConfig> = input.required();
 
   writerService: WriterService = inject(WriterService);
   resetTextDialogVisible: WritableSignal<boolean> = signal(false);
