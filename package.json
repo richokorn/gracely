@@ -1,9 +1,10 @@
 {
   "name": "gracely",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node write-version.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
