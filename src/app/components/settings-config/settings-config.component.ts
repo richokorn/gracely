@@ -55,7 +55,6 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
     Divider,
     TranslatePipe,
     Dialog,
-    Select,
   ],
   templateUrl: './settings-config.component.html',
   styleUrl: './settings-config.component.scss',

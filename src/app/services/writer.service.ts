@@ -2,12 +2,15 @@ import {
   computed,
   effect,
   ElementRef,
+  EnvironmentInjector,
+  inject,
   Injectable,
   Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
 import { TimedChar } from '../../types/timed-char.type';
+import { localStorageSignal } from './local-storage-signal';
 
 @Injectable({
   providedIn: 'root',
@@ -16,31 +19,38 @@ export class WriterService {
   readonly _placeholder: WritableSignal<string> = signal<string>(
     this.generatePlaceholder(),
   );
-  private readonly localStorageKey: string = 'gracely-text';
+  private env: EnvironmentInjector = inject(EnvironmentInjector);
+
   private readonly lockDelayMs: number = 5000; // ms
   private readonly _now: WritableSignal<number> = signal<number>(Date.now());
   private readonly _currentText: WritableSignal<TimedChar[]> = signal<
     TimedChar[]
   >([]);
-  private readonly _permanentText: WritableSignal<string> = signal<string>(
-    this.loadText(),
+
+  // Single, persistent signal bound to localStorage (no duplication).
+  private readonly _permanentText: WritableSignal<string> = localStorageSignal(
+    'gracely_permanent_text',
+    '',
+    this.env,
   );
-  readonly combinedText: Signal<string> = computed(() => {
-    return (
+
+  readonly combinedText: Signal<string> = computed(
+    () =>
       this._permanentText() +
       this._currentText()
         .map((c: TimedChar) => c.char)
-        .join('')
-    );
-  });
+        .join(''),
+  );
+
   private _textAreaEl!: HTMLTextAreaElement;
 
   constructor() {
+    // Ticks the timer, promotes expired chars, and updates the UI.
+    // We no longer write to localStorage here; _permanentText syncs itself.
     effect(() => {
       const interval: number = setInterval(() => {
         this._now.set(Date.now());
         this.promoteExpiredText();
-        this.saveText();
       }, 500);
       return () => clearInterval(interval);
     });
@@ -48,27 +58,12 @@ export class WriterService {
 
   registerTextArea(el: ElementRef<HTMLTextAreaElement>) {
     this._textAreaEl = el.nativeElement;
-    console.log('Text area registered:', this._textAreaEl);
-  }
-
-  // correctly ported
-
-  loadText(): string {
-    const storedText: string | null = localStorage.getItem(
-      this.localStorageKey,
-    );
-    return storedText ? storedText : '';
-  }
-
-  saveText(): void {
-    localStorage.setItem(this.localStorageKey, this.combinedText());
   }
 
   resetText(): void {
     navigator.clipboard.writeText(this.combinedText());
     this._currentText.set([]);
     this._permanentText.set('');
-    localStorage.setItem(this.localStorageKey, '');
     this._placeholder.set(this.generatePlaceholder());
     this.updateTextarea();
   }
@@ -163,9 +158,9 @@ export class WriterService {
     );
 
     if (action === '+') {
-      this._textAreaEl.style.fontSize = `${currentSize + 1}px`;
+      this._textAreaEl.style.fontSize = `${currentSize + 2}px`;
     } else if (action === '-') {
-      this._textAreaEl.style.fontSize = `${Math.max(currentSize - 1, 10)}px`;
+      this._textAreaEl.style.fontSize = `${Math.max(currentSize - 2, 10)}px`;
     }
   }
 }

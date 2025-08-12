@@ -23,32 +23,23 @@
         <button
           (click)="updateColors($event, 'surface', s)"
           [ngClass]="[
-              'color-button',
-              (
-                selectedSurface()
-                  ? selectedSurface() === s.name
-                  : isDarkMode()
-                    ? s.name === 'zinc'
-                    : s.name === 'slate'
-              )
-                ? 'selected'
-                : '',
-            ]"
+            'color-button',
+            (
+              selectedSurface()
+                ? selectedSurface() === s.name
+                : isDarkMode()
+                  ? s.name === 'zinc'
+                  : s.name === 'slate'
+            )
+              ? 'selected'
+              : '',
+          ]"
           [ngStyle]="{ backgroundColor: s?.palette?.['500'] }"
           [title]="s.name"
           type="button"
         ></button>
       }
     </div>
-  </div>
-  <p-divider></p-divider>
-  <div>
-    <p-button
-      (click)="resetTextDialogVisible.set(true)"
-      [label]="'common.resetText' | translate"
-      class="reset-colors-button"
-      severity="secondary"
-    ></p-button>
   </div>
   <span class="config-label">{{ "common.fontSize" | translate }}</span>
   <div class="row flex gap-2">
@@ -72,20 +63,46 @@
       severity="secondary"
     ></p-button>
   </div>
-  <p-select
-    (onChange)="langConfig().translate($event.value)"
-    [(ngModel)]="langConfig().selectedLanguage"
-    [options]="langConfig().supportedLanguages"
-  ></p-select>
+  <p-divider layout="horizontal"></p-divider>
+  <span class="config-label">{{ "common.resetText" | translate }}</span>
+  <div>
+    <p-button
+      (click)="resetTextDialogVisible.set(true)"
+      [label]="'common.resetText' | translate"
+      class="reset-colors-button"
+      icon="pi pi-trash"
+      severity="warn"
+    ></p-button>
+  </div>
+  <div>
+
+  </div>
+  <!--  <p-select-->
+  <!--    (onChange)="langConfig().translate($event.value)"-->
+  <!--    [(ngModel)]="langConfig().selectedLanguage"-->
+  <!--    [options]="langConfig().supportedLanguages"-->
+  <!--  ></p-select>-->
 </div>
 
-<p-dialog [(visible)]="resetTextDialogVisible"
-          [modal]="true"
-          [style]="{ width: '25rem' }"
-          header="Really clear the text?">
+<p-dialog
+  [(visible)]="resetTextDialogVisible"
+  dismissableMask
+  [modal]="true"
+  [style]="{ width: '25rem' }"
+  header="Really clear the text?"
+>
   <div class="flex justify-end gap-2">
-    <p-button (click)="resetTextDialogVisible.set(false)" label="Back" severity="secondary"/>
-    <p-button (click)="resetTextDialogVisible.set(false); writerService.resetText()" label="Confirm" severity="warn"/>
+    <p-button
+      (click)="resetTextDialogVisible.set(false)"
+      label="Back"
+      severity="secondary"
+    />
+    <p-button
+      (click)="resetTextDialogVisible.set(false); writerService.resetText()"
+      label="Confirm"
+      icon="pi pi-trash"
+      severity="warn"
+    />
     <span></span>
     <span></span>
     <small>Text will be copied to your clipboard when confirmed.</small>

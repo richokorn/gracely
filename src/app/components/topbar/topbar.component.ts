@@ -6,7 +6,6 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { LangConfig } from '../../../types/lang-config.type';
 import { ButtonModule } from 'primeng/button';
 import { AppState, LayoutService } from '../../services/layout.service';
@@ -17,6 +16,8 @@ import { CommonModule } from '@angular/common';
 import { StyleClassModule } from 'primeng/styleclass';
 import { SettingsConfigComponent } from '../settings-config/settings-config.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AppStateService } from '../../services/app-state.service';
+import { BrandingComponent } from '../branding/branding.component';
 
 @Component({
   selector: 'app-topbar',
@@ -30,6 +31,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     SelectModule,
     TranslateModule,
     FormsModule,
+    BrandingComponent,
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
@@ -37,16 +39,20 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 })
 export class TopbarComponent {
   layoutService: LayoutService = inject(LayoutService);
+  appStateService: AppStateService = inject(AppStateService);
   langConfig: InputSignal<LangConfig> = input.required();
   isDarkMode: Signal<boolean> = computed(
     () => this.layoutService.appState().darkMode,
   );
-  menuItems: InputSignal<MenuItem[]> = input.required();
 
   toggleDarkMode() {
     this.layoutService.appState.update((state: AppState) => ({
       ...state,
       darkMode: !state.darkMode,
     }));
+  }
+
+  showWelcomeChangelog() {
+    this.appStateService.resetChangelogState();
   }
 }

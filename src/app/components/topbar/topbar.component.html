@@ -1,12 +1,17 @@
 <div class="topbar-container">
-  <div class="topbar-brand">
-    <i class="pi pi-pencil"></i>
-    <span class="topbar-brand-text">
-      <span class="topbar-title">{{ "title" | translate }}</span>
-      <small class="topbar-subtitle">{{ "title-sub" | translate }}</small>
-    </span>
-  </div>
+  <app-branding />
   <div class="topbar-actions">
+    <p-button
+      (click)="showWelcomeChangelog()"
+      class="topbar-changelog-button"
+      rounded
+      text
+      type="button"
+    >
+      <i
+        class="pi pi-question-circle"
+      ></i>
+    </p-button>
     <p-button
       (click)="toggleDarkMode()"
       class="topbar-theme-button"
