@@ -1,0 +1,30 @@
+{
+  "title": "gracely",
+  "title-sub": "simply write",
+  "welcome-changelog": {
+    "message1": {
+      "part1": "Welcome to ",
+      "part2": "gracely",
+      "part3": "! ",
+      "part4": "Every character typed is given ",
+      "part5": "four seconds ",
+      "part6": "of grace period to fix typos until it is permanent."
+    },
+    "message2": {
+      "part1": "This app only stores your own writing and settings to your own browser. ",
+      "part2": "No user data is sent to us or any server. "
+    },
+    "message3": {
+      "part1": "In the top-right menu, you can find more functions. "
+    }
+  },
+  "common": {
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "back": "Back",
+    "resetText": "Clear Document",
+    "fontSize": "Font Size"
+  }
+}
+
