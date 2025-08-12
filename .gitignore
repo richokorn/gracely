@@ -2,6 +2,9 @@
 
 # Compiled output
 #/dist
+/dist
+# Because GitHub is being stupid and not allowing other directories than "/" or "/docs"
+!/docs
 /tmp
 /out-tsc
 /bazel-out
@@ -12,6 +15,7 @@ npm-debug.log
 yarn-error.log
 
 # IDEs and editors
+
 .idea/
 .project
 .classpath
