@@ -3,14 +3,17 @@ import {
   WritableSignal,
   effect,
   runInInjectionContext,
-  EnvironmentInjector, Injector
+  EnvironmentInjector,
 } from '@angular/core';
 
 export interface LocalStorageMap {
   gracely_welcome_changelog_dismissed: boolean;
   gracely_last_seen_version: string;
   gracely_permanent_text: string;
-  gracely_chosen_language: string;
+  gracely_language: string;
+  gracely_font_family: string;
+  gracely_font_size: string;
+  gracely_letter_spacing: string;
 }
 
 export function localStorageSignal<K extends keyof LocalStorageMap>(
