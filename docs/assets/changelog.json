@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2025-08-13",
+    "entries": [
+      "Increased writing area height. Forced height-centered focused line.",
+      "Added Font Family and Letter Spacing choices to settings dialog.",
+      "Style changes to Welcome-Changelog dialog."
+    ]
+  },
+  {
+    "date": "2025-08-12",
+    "entries": [
+      "Implemented changelog and welcome dialog.",
+      "Slight changes to settings dialog."
+    ]
+  },
+  {
+    "date": "2025-07-30",
+    "entries": [
+      "Built main app and deployed prototype to production."
+    ]
+  }
+]

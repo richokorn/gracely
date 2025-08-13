@@ -1,0 +1,20 @@
+{
+  "title": "gracely",
+  "title-sub": "simply write",
+  "welcome-changelog": {
+    "message1": "Welcome to <span class='text-primary-400'>gracely</span>!",
+    "message2": "Every input is given <span class='font-bold'>four seconds</span> of grace period until it is permanent.",
+    "message3": "Only your browser stores your writing and settings. <br><span class='font-bold'>No user data is sent to us or any server.</span>",
+    "message4": "In the top-right menu, you can find more functions. <i class='text-primary-400 pi pi-cog'></i>"
+  },
+  "common": {
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "back": "Back",
+    "resetText": "Clear Document",
+    "fontSize": "Font Size",
+    "fontFamily": "Font Family",
+    "letterSpacing": "Letter Spacing"
+  }
+}
