@@ -2,8 +2,8 @@
   [(visible)]="appStateService.changelogVisible"
   [modal]="true"
   [style]="{
-    width: '50vw',
-    height: '30vh',
+    width: '30vw',
+    height: '40vh',
     padding: '2vw',
     paddingTop: '3vh',
   }"
@@ -19,28 +19,11 @@
   <p-divider layout="horizontal"></p-divider>
 
   <div class="d-flex flex-column justify-content-center gap-4">
-    <div>
-      <span>{{ "welcome-changelog.message1.part1" | translate }}</span>
-      <span class="text-primary-400">{{
-        "welcome-changelog.message1.part2" | translate
-      }}</span>
-      <span>{{ "welcome-changelog.message1.part3" | translate }}</span>
-      <span>{{ "welcome-changelog.message1.part4" | translate }}</span>
-      <span class="font-bold">{{
-        "welcome-changelog.message1.part5" | translate
-      }}</span>
-      <span>{{ "welcome-changelog.message1.part6" | translate }}</span>
-    </div>
-    <div>
-      <span>{{ "welcome-changelog.message2.part1" | translate }}</span>
-      <span class="font-bold">{{
-        "welcome-changelog.message2.part2" | translate
-      }}</span>
-    </div>
-    <div>
-      <span>{{ "welcome-changelog.message3.part1" | translate }}</span>
-      <i class="text-primary-400 pi pi-cog"></i>
-    </div>
+    @for (i of [1,2,3,4]; track i) {
+      <div>
+        <span [innerHTML]="'welcome-changelog.message' + i | translate"></span>
+      </div>
+    }
   </div>
 
   <p-divider layout="horizontal"></p-divider>
