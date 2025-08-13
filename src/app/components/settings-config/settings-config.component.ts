@@ -27,11 +27,9 @@ import { ButtonModule } from 'primeng/button';
 import { surfacesExport, SurfacesType } from './settings-config-presets';
 import { AuraBaseTokenSections } from '@primeuix/themes/aura/base';
 import { LaraBaseTokenSections } from '@primeuix/themes/lara/base';
-import { Divider } from 'primeng/divider';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Dialog } from 'primeng/dialog';
 import { WriterService } from '../../services/writer.service';
-import { Select } from 'primeng/select';
 import { LangConfig } from '../../../types/lang-config.type';
 
 const presets = {
@@ -52,7 +50,6 @@ declare type KeyOfType<T> = keyof T extends infer U ? U : never;
     RadioButtonModule,
     RippleModule,
     ButtonModule,
-    Divider,
     TranslatePipe,
     Dialog,
   ],
