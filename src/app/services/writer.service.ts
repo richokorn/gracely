@@ -10,7 +10,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { TimedChar } from '../../types/timed-char.type';
-import { localStorageSignal } from './local-storage-signal';
+import { localStorageSignal } from './local-storage.signal';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +27,25 @@ export class WriterService {
     TimedChar[]
   >([]);
 
-  // Single, persistent signal bound to localStorage (no duplication).
   private readonly _permanentText: WritableSignal<string> = localStorageSignal(
     'gracely_permanent_text',
     '',
     this.env,
   );
+
+  readonly _currentFontSize: WritableSignal<string> = localStorageSignal(
+    'gracely_font_size',
+    '16',
+    this.env,
+  );
+
+  readonly _currentFontFamily: WritableSignal<string> = localStorageSignal(
+    'gracely_font_family',
+    'monospace',
+    this.env,
+  );
+  readonly _currentLetterSpacing: WritableSignal<string | number> =
+    localStorageSignal('gracely_letter_spacing', 'normal', this.env);
 
   readonly combinedText: Signal<string> = computed(
     () =>
@@ -86,6 +99,14 @@ export class WriterService {
       this._currentText.set(fresh);
       this.updateTextarea();
     }
+  }
+
+  initTextArea(): void {
+    this._textAreaEl.style.fontSize = this._currentFontSize();
+    this._textAreaEl.style.fontFamily = this._currentFontFamily();
+    this._textAreaEl.style.letterSpacing =
+      this._currentLetterSpacing() as string;
+    this.updateTextarea();
   }
 
   updateTextarea(): void {
@@ -143,24 +164,72 @@ export class WriterService {
       });
     }
 
+    setTimeout(() => {
+      this._textAreaEl.scrollTop = this._textAreaEl.scrollHeight;
+    }, 0);
+
     this._currentText.set(newCurrent);
     this.updateTextarea();
   }
 
   updateFontSize(action: '+' | '-' | 'reset'): void {
-    if (action === 'reset') {
-      this._textAreaEl.style.fontSize = '16px'; // Reset to default size
-      return;
-    }
-
-    const currentSize: number = parseFloat(
-      window.getComputedStyle(this._textAreaEl).fontSize,
+    let currentFontSize: number = Number(
+      window.getComputedStyle(this._textAreaEl).fontSize.slice(0, -2),
     );
 
-    if (action === '+') {
-      this._textAreaEl.style.fontSize = `${currentSize + 2}px`;
-    } else if (action === '-') {
-      this._textAreaEl.style.fontSize = `${Math.max(currentSize - 2, 10)}px`;
+    switch (action) {
+      case '+':
+        currentFontSize = currentFontSize + 2;
+        break;
+      case '-':
+        currentFontSize = Math.max(currentFontSize - 2, 10);
+        break;
+      case 'reset':
+        currentFontSize = 16;
+        break;
+      default:
+        return; // Invalid action, do nothing
     }
+
+    this._textAreaEl.style.fontSize = currentFontSize + 'px';
+    this._currentFontSize.set(currentFontSize + 'px');
+  }
+
+  updateLetterSpacing(action: '+' | '-' | 'reset'): void {
+    let currentLetterSpacing: number =
+      window.getComputedStyle(this._textAreaEl).letterSpacing === 'normal'
+        ? 0
+        : Number(
+            window
+              .getComputedStyle(this._textAreaEl)
+              .letterSpacing.slice(0, -2),
+          );
+
+    switch (action) {
+      case '+':
+        currentLetterSpacing = currentLetterSpacing + 1;
+        break;
+      case '-':
+        currentLetterSpacing = Math.max(currentLetterSpacing - 1, 0);
+        break;
+      case 'reset':
+        currentLetterSpacing = 0;
+        break;
+      default:
+        return;
+    }
+
+    this._textAreaEl.style.letterSpacing = currentLetterSpacing === 0 ? 'normal' : currentLetterSpacing + 'px';
+    this._currentLetterSpacing.set(currentLetterSpacing === 0 ? 'normal' : currentLetterSpacing + 'px');
+  }
+
+  updateFontFamily(fontFamily: string): void {
+    if (this._textAreaEl) {
+      this._textAreaEl.style.fontFamily = fontFamily;
+    }
+    localStorageSignal('gracely_font_family', fontFamily, this.env).set(
+      fontFamily,
+    );
+    this._currentFontFamily.set(fontFamily);
   }
 }

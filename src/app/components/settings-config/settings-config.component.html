@@ -63,7 +63,52 @@
       severity="secondary"
     ></p-button>
   </div>
-  <p-divider layout="horizontal"></p-divider>
+  <span class="config-label">{{"common.fontFamily" | translate }}</span>
+  <div class="row flex gap-2">
+    <p-button
+      (click)="writerService.updateFontFamily('monospace')"
+      [label]="'Aa'"
+      [style.font-family]="'monospace'"
+      severity="secondary"
+    ></p-button>
+    <p-button
+      (click)="writerService.updateFontFamily('Calibri, sans-serif')"
+      [label]="'Aa'"
+      [style.font-family]="'Calibri, sans-serif'"
+      severity="secondary"
+    ></p-button>
+    <p-button
+      (click)="writerService.updateFontFamily('Garamond, serif')"
+      [label]="'Aa'"
+      [style.font-family]="'Garamond, serif'"
+      severity="secondary"
+    ></p-button>
+    <p-button
+      (click)="writerService.updateFontFamily('Helvetica, sans-serif')"
+      [label]="'Aa'"
+      [style.font-family]="'Helvetica, sans-serif'"
+      severity="secondary"
+    ></p-button>
+    </div>
+  <span class="config-label">{{"common.letterSpacing" | translate }}</span>
+    <div class="row flex gap-2">
+      <p-button
+        (click)="writerService.updateLetterSpacing('+')"
+        icon="pi pi-arrows-h"
+        severity="secondary"
+      ></p-button>
+      <p-button
+        (click)="writerService.updateLetterSpacing('-')"
+        icon="pi pi-minus"
+        severity="secondary"
+      ></p-button>
+      <p-button
+        (click)="writerService.updateLetterSpacing('reset')"
+        [label]="'common.reset' | translate"
+        icon="pi pi-refresh"
+        severity="secondary"
+      ></p-button>
+  </div>
   <span class="config-label">{{ "common.resetText" | translate }}</span>
   <div>
     <p-button
@@ -74,15 +119,14 @@
       severity="warn"
     ></p-button>
   </div>
-  <div>
-
-  </div>
   <!--  <p-select-->
   <!--    (onChange)="langConfig().translate($event.value)"-->
   <!--    [(ngModel)]="langConfig().selectedLanguage"-->
   <!--    [options]="langConfig().supportedLanguages"-->
   <!--  ></p-select>-->
 </div>
+
+
 
 <p-dialog
   [(visible)]="resetTextDialogVisible"
