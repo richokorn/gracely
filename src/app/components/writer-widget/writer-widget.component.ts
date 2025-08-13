@@ -25,7 +25,7 @@ export class WriterWidgetComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.writerService.registerTextArea(this.textAreaElement);
-    this.writerService.updateTextarea();
+    this.writerService.initTextArea();
   }
 
   onInput(): void {
