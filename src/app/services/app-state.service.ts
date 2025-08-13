@@ -2,7 +2,7 @@ import { computed, effect, EnvironmentInjector, inject, Injectable, Signal, sign
 import { APP_VERSION } from '../../version';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { localStorageSignal } from './local-storage-signal';
+import { localStorageSignal } from './local-storage.signal';
 
 @Injectable({
   providedIn: 'root',
